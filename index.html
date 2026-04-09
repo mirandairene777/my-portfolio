@@ -1,1065 +1,1427 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Irene Miranda | CS Student & Dev 🇵🇭</title>
-    
+
     <!-- FAVICON -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✝️</text></svg>">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✝️</text></svg>" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap"
+      rel="stylesheet" />
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        :root {
-            --bg: #0a0a0f;
-            --surface: #13131a;
-            --accent: #7c3aed;
-            --accent2: #06b6d4;
-            --text: #e2e8f0;
-            --muted: #64748b;
-        }
+      :root {
+        --bg: #0a0a0f;
+        --surface: #13131a;
+        --accent: #7c3aed;
+        --accent2: #06b6d4;
+        --text: #f8fafc;
+        --muted: #94a3b8;
+      }
 
-        body {
-            background: var(--bg);
-            color: var(--text);
-            font-family: 'Space Grotesk', sans-serif;
-            overflow-x: hidden;
-            cursor: none;
-        }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Space Grotesk", sans-serif;
+        overflow-x: hidden;
+        cursor: none;
+      }
 
-        /* CURSOR */
-        .cursor {
-            width: 20px; height: 20px;
-            background: rgba(124,58,237,0.8);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.1s ease;
-            mix-blend-mode: screen;
-        }
-        .cursor-trail {
-            width: 8px; height: 8px;
-            background: rgba(6,182,212,0.6);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9998;
-            transition: all 0.15s ease;
-        }
+      /* CURSOR */
+      .cursor {
+        width: 20px;
+        height: 20px;
+        background: rgba(124, 58, 237, 0.8);
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 9999;
+        transition: transform 0.1s ease;
+        mix-blend-mode: screen;
+      }
+      .cursor-trail {
+        width: 8px;
+        height: 8px;
+        background: rgba(6, 182, 212, 0.6);
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 9998;
+        transition: all 0.15s ease;
+      }
 
-        /* PARTICLES */
-        #particles {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
+      /* PARTICLES */
+      #particles {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        overflow: hidden;
+      }
+      .particle {
+        position: absolute;
+        width: 2px;
+        height: 2px;
+        background: rgba(124, 58, 237, 0.6);
+        border-radius: 50%;
+        animation: float linear infinite;
+      }
+      @keyframes float {
+        0% {
+          transform: translateY(100vh) translateX(0);
+          opacity: 0;
         }
-        .particle {
-            position: absolute;
-            width: 2px; height: 2px;
-            background: rgba(124,58,237,0.6);
-            border-radius: 50%;
-            animation: float linear infinite;
+        10% {
+          opacity: 1;
         }
-        @keyframes float {
-            0% { transform: translateY(100vh) translateX(0); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-10vh) translateX(100px); opacity: 0; }
+        90% {
+          opacity: 1;
         }
+        100% {
+          transform: translateY(-10vh) translateX(100px);
+          opacity: 0;
+        }
+      }
 
-        /* MESH GRADIENT BG */
-        body::after {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background: 
-                radial-gradient(ellipse at 20% 50%, rgba(124,58,237,0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 20%, rgba(6,182,212,0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 80%, rgba(124,58,237,0.05) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: 0;
-        }
+      /* MESH GRADIENT BG */
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background:
+          radial-gradient(
+            ellipse at 20% 50%,
+            rgba(124, 58, 237, 0.08) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            ellipse at 80% 20%,
+            rgba(6, 182, 212, 0.08) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            ellipse at 50% 80%,
+            rgba(124, 58, 237, 0.05) 0%,
+            transparent 50%
+          );
+        pointer-events: none;
+        z-index: 0;
+      }
 
-        /* NOISE */
-        body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-            pointer-events: none;
-            z-index: 999;
-        }
+      /* NOISE */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+        pointer-events: none;
+        z-index: 999;
+      }
 
-        /* NAV */
-        nav {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            padding: 1.5rem 10vw;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 100;
-            background: rgba(10,10,15,0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+      /* NAV */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 1.5rem 10vw;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 100;
+        background: rgba(10, 10, 15, 0.8);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .nav-logo {
+        font-family: "Fira Code", monospace;
+        color: var(--accent2);
+        font-size: 1rem;
+      }
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+      }
+      .nav-links a {
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: color 0.3s;
+        font-family: "Fira Code", monospace;
+      }
+      .nav-links a:hover {
+        color: var(--accent2);
+      }
+
+      /* HERO */
+      .hero {
+        min-height: 100vh;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        padding: 0 10vw;
+        padding-top: 5rem;
+        position: relative;
+        z-index: 1;
+        gap: 4rem;
+      }
+
+      .hero-left {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .hero-tag {
+        font-family: "Fira Code", monospace;
+        color: var(--accent2);
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        opacity: 0;
+        animation: fadeUp 0.6s ease forwards 0.2s;
+      }
+      .hero h1 {
+        font-size: clamp(2.5rem, 5vw, 5rem);
+        font-weight: 700;
+        line-height: 1;
+        margin-bottom: 1rem;
+        opacity: 0;
+        animation: fadeUp 0.6s ease forwards 0.4s;
+      }
+
+      /* GLITCH */
+      /* GLITCH - MAXIMUM CORRUPTION */
+      .glitch {
+        position: relative;
+        color: #fff;
+        font-weight: 700;
+        display: inline-block;
+        /* Forces the browser to use GPU for smoother, faster glitching */
+        will-change: transform;
+      }
+
+      .glitch::before,
+      .glitch::after {
+        content: attr(data-text);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--bg);
+        overflow: hidden;
+      }
+
+      /* RED CHANNEL - The primary error */
+      .glitch::before {
+        color: #ff0055;
+        animation: glitch-crash 0.3s infinite linear alternate-reverse;
+      }
+
+      /* CYAN CHANNEL - The secondary error */
+      .glitch::after {
+        color: #00fff2;
+        animation: glitch-crash 0.2s infinite linear alternate-reverse;
+      }
+
+      @keyframes glitch-crash {
+        0% {
+          clip-path: inset(10% 0 80% 0);
+          transform: skew(10deg);
         }
-        .nav-logo {
-            font-family: 'Fira Code', monospace;
-            color: var(--accent2);
-            font-size: 1rem;
+        10% {
+          clip-path: inset(50% 0 30% 0);
+          transform: skew(-15deg);
+        }
+        20% {
+          clip-path: inset(20% 0 60% 0);
+          transform: skew(20deg);
+        }
+        30% {
+          clip-path: inset(80% 0 5% 0);
+          transform: skew(-5deg);
+        }
+        40% {
+          clip-path: inset(30% 0 40% 0);
+          transform: skew(30deg);
+        }
+        50% {
+          clip-path: inset(5% 0 90% 0);
+          transform: skew(-10deg);
+        }
+        60% {
+          clip-path: inset(60% 0 10% 0);
+          transform: skew(0deg);
+        }
+        70% {
+          clip-path: inset(40% 0 50% 0);
+          transform: skew(-20deg);
+        }
+        80% {
+          clip-path: inset(15% 0 75% 0);
+          transform: skew(15deg);
+        }
+        90% {
+          clip-path: inset(0% 0 0% 0);
+          transform: skew(0deg);
+        }
+        100% {
+          clip-path: inset(70% 0 20% 0);
+          transform: skew(-10deg);
+        }
+      }
+      .typewriter {
+        font-size: 1.1rem;
+        color: var(--accent2);
+        font-family: "Fira Code", monospace;
+        margin-bottom: 1rem;
+        opacity: 0;
+        animation: fadeUp 0.6s ease forwards 0.5s;
+        min-height: 2rem;
+      }
+      .typewriter-cursor {
+        animation: blink 1s infinite;
+      }
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+      }
+
+      .hero-desc {
+        font-size: 1rem;
+        color: var(--muted);
+        max-width: 500px;
+        line-height: 1.7;
+        margin-bottom: 2rem;
+        opacity: 0;
+        animation: fadeUp 0.6s ease forwards 0.6s;
+      }
+      .hero-buttons {
+        display: flex;
+        gap: 1rem;
+        opacity: 0;
+        animation: fadeUp 0.6s ease forwards 0.8s;
+        flex-wrap: wrap;
+      }
+
+      /* QUICK STATS */
+      .quick-stats {
+        display: flex;
+        gap: 2rem;
+        margin-top: 2.5rem;
+        opacity: 0;
+        animation: fadeUp 0.6s ease forwards 1s;
+      }
+      .stat {
+        text-align: center;
+      }
+      .stat-number {
+        font-size: 1.8rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--accent), var(--accent2));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-family: "Fira Code", monospace;
+      }
+      .stat-label {
+        font-size: 0.7rem;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      /* TERMINAL */
+      .terminal {
+        background: #0d0d14;
+        border: 1px solid rgba(124, 58, 237, 0.3);
+        border-radius: 12px;
+        overflow: hidden;
+        opacity: 0;
+        animation: fadeUp 0.6s ease forwards 0.6s;
+        box-shadow:
+          0 25px 60px rgba(0, 0, 0, 0.5),
+          0 0 40px rgba(124, 58, 237, 0.1);
+      }
+      .terminal-header {
+        background: #1a1a2e;
+        padding: 0.8rem 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .terminal-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+      }
+      .terminal-dot.red {
+        background: #ff5f57;
+      }
+      .terminal-dot.yellow {
+        background: #febc2e;
+      }
+      .terminal-dot.green {
+        background: #28c840;
+      }
+      .terminal-title {
+        font-family: "Fira Code", monospace;
+        font-size: 0.75rem;
+        color: var(--muted);
+        margin-left: 0.5rem;
+      }
+      .terminal-body {
+        padding: 1.5rem;
+        font-family: "Fira Code", monospace;
+        font-size: 0.8rem;
+        line-height: 2;
+        min-height: 280px;
+      }
+      .t-comment {
+        color: #4a5568;
+      }
+      .t-keyword {
+        color: #a78bfa;
+      }
+      .t-string {
+        color: #68d391;
+      }
+      .t-func {
+        color: var(--accent2);
+      }
+      .t-num {
+        color: #f6ad55;
+      }
+      .t-cursor {
+        display: inline-block;
+        width: 8px;
+        height: 14px;
+        background: var(--accent2);
+        animation: blink 1s infinite;
+        vertical-align: middle;
+      }
+
+      /* BTN */
+      .btn {
+        padding: 0.8rem 2rem;
+        border-radius: 8px;
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 0.95rem;
+        font-weight: 500;
+        cursor: none;
+        transition: all 0.3s ease;
+        text-decoration: none;
+      }
+      .btn-primary {
+        background: linear-gradient(135deg, var(--accent), var(--accent2));
+        color: white;
+        border: none;
+      }
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(124, 58, 237, 0.4);
+      }
+      .btn-secondary {
+        background: transparent;
+        color: var(--text);
+        border: 1px solid var(--muted);
+      }
+      .btn-secondary:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+        transform: translateY(-2px);
+      }
+
+      /* SECTIONS */
+      section {
+        padding: 8rem 10vw;
+        position: relative;
+        z-index: 1;
+      }
+      .section-label {
+        font-family: "Fira Code", monospace;
+        color: var(--accent2);
+        font-size: 0.85rem;
+        margin-bottom: 0.5rem;
+      }
+      .section-title {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 700;
+        margin-bottom: 3rem;
+      }
+
+      /* FADE IN */
+      .fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition:
+          opacity 0.7s ease,
+          transform 0.7s ease;
+      }
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* ABOUT */
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+      }
+      .about-text p {
+        color: var(--muted);
+        line-height: 1.8;
+        margin-bottom: 1rem;
+        font-size: 1.05rem;
+      }
+      .about-text p span {
+        color: var(--accent2);
+        font-weight: 500;
+      }
+      .about-card {
+        background: var(--surface);
+        border: 1px solid rgba(124, 58, 237, 0.2);
+        border-radius: 16px;
+        padding: 2rem;
+        font-family: "Fira Code", monospace;
+        font-size: 0.85rem;
+        line-height: 1.8;
+      }
+      .about-card .comment {
+        color: #4a5568;
+      }
+      .about-card .key {
+        color: var(--accent2);
+      }
+      .about-card .value {
+        color: #a78bfa;
+      }
+      .about-card .string {
+        color: #68d391;
+      }
+      .about-card .bracket {
+        color: var(--text);
+      }
+
+      /* TIMELINE */
+      .timeline {
+        position: relative;
+        padding-left: 2rem;
+      }
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(
+          to bottom,
+          var(--accent),
+          var(--accent2),
+          transparent
+        );
+      }
+      .timeline-item {
+        position: relative;
+        padding-bottom: 2.5rem;
+        padding-left: 2rem;
+      }
+      .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: -2.4rem;
+        top: 0.4rem;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--accent);
+        border: 2px solid var(--accent2);
+        box-shadow: 0 0 10px rgba(124, 58, 237, 0.5);
+      }
+      .timeline-date {
+        font-family: "Fira Code", monospace;
+        font-size: 0.75rem;
+        color: var(--accent2);
+        margin-bottom: 0.3rem;
+      }
+      .timeline-title {
+        font-weight: 600;
+        font-size: 1rem;
+        margin-bottom: 0.3rem;
+      }
+      .timeline-desc {
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.6;
+      }
+
+      /* SKILLS */
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+      }
+      .skill-card {
+        background: var(--surface);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        padding: 1.5rem;
+        transition: all 0.3s ease;
+      }
+      .skill-card:hover {
+        border-color: rgba(124, 58, 237, 0.4);
+        transform: translateY(-4px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      }
+      .skill-card h3 {
+        font-size: 0.8rem;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 1rem;
+        font-family: "Fira Code", monospace;
+      }
+      .skill-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      .tag {
+        background: rgba(124, 58, 237, 0.15);
+        color: #a78bfa;
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-family: "Fira Code", monospace;
+        border: 1px solid rgba(124, 58, 237, 0.2);
+      }
+      .tag.cyan {
+        background: rgba(6, 182, 212, 0.15);
+        color: var(--accent2);
+        border-color: rgba(6, 182, 212, 0.2);
+      }
+      .tag.green {
+        background: rgba(52, 211, 153, 0.15);
+        color: #34d399;
+        border-color: rgba(52, 211, 153, 0.2);
+      }
+
+      /* CERT */
+      .cert-card {
+        background: var(--surface);
+        border: 1px solid rgba(251, 191, 36, 0.3);
+        border-radius: 16px;
+        padding: 2rem;
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        color: var(--text);
+        max-width: 600px;
+      }
+      .cert-card:hover {
+        border-color: rgba(251, 191, 36, 0.6);
+        transform: translateY(-4px);
+        box-shadow: 0 20px 40px rgba(251, 191, 36, 0.1);
+      }
+      .cert-emoji {
+        font-size: 3rem;
+      }
+      .cert-title {
+        font-weight: 600;
+        font-size: 1.1rem;
+        margin-bottom: 0.3rem;
+      }
+      .cert-sub {
+        color: var(--muted);
+        font-size: 0.85rem;
+        font-family: "Fira Code", monospace;
+      }
+      .cert-badge {
+        margin-left: auto;
+        background: rgba(251, 191, 36, 0.15);
+        color: #fbbf24;
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        border: 1px solid rgba(251, 191, 36, 0.3);
+        font-family: "Fira Code", monospace;
+        white-space: nowrap;
+      }
+
+      /* PROJECTS */
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 1.5rem;
+      }
+      .project-card {
+        background: var(--surface);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 16px;
+        padding: 2rem;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .project-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--accent), var(--accent2));
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+      }
+      .project-card:hover::before {
+        transform: scaleX(1);
+      }
+      .project-card:hover {
+        border-color: rgba(124, 58, 237, 0.3);
+        transform: translateY(-6px);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+      }
+      .project-emoji {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+      .project-status {
+        display: inline-block;
+        font-size: 0.7rem;
+        font-family: "Fira Code", monospace;
+        padding: 0.2rem 0.6rem;
+        border-radius: 20px;
+        margin-bottom: 1rem;
+      }
+      .status-wip {
+        background: rgba(251, 191, 36, 0.15);
+        color: #fbbf24;
+        border: 1px solid rgba(251, 191, 36, 0.2);
+      }
+      .status-done {
+        background: rgba(52, 211, 153, 0.15);
+        color: #34d399;
+        border: 1px solid rgba(52, 211, 153, 0.2);
+      }
+      .project-card h3 {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 0.8rem;
+      }
+      .project-card p {
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+      }
+      .project-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+      }
+
+      /* FUN FACTS */
+      .facts-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+      }
+      .fact-card {
+        background: var(--surface);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        padding: 1.5rem;
+        text-align: center;
+        transition: all 0.3s ease;
+      }
+      .fact-card:hover {
+        border-color: rgba(124, 58, 237, 0.3);
+        transform: translateY(-4px);
+      }
+      .fact-emoji {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+      }
+      .fact-text {
+        color: var(--muted);
+        font-size: 0.85rem;
+        line-height: 1.5;
+      }
+      .fact-text span {
+        color: var(--text);
+        font-weight: 600;
+      }
+
+      /* CONTACT */
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: start;
+      }
+      .contact-text p {
+        color: var(--muted);
+        line-height: 1.8;
+        font-size: 1.05rem;
+        margin-bottom: 2rem;
+      }
+      .contact-links {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .contact-link {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem 1.5rem;
+        background: var(--surface);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        text-decoration: none;
+        color: var(--text);
+        transition: all 0.3s ease;
+        font-size: 0.9rem;
+      }
+      .contact-link:hover {
+        border-color: rgba(124, 58, 237, 0.4);
+        transform: translateX(6px);
+        color: var(--accent2);
+      }
+      .contact-link .link-icon {
+        font-size: 1.2rem;
+        width: 2rem;
+        text-align: center;
+      }
+      .contact-link .link-label {
+        font-family: "Fira Code", monospace;
+        font-size: 0.75rem;
+        color: var(--muted);
+        display: block;
+      }
+
+      /* FOOTER */
+      footer {
+        padding: 3rem 10vw;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: var(--muted);
+        font-size: 0.9rem;
+        position: relative;
+        z-index: 1;
+      }
+      footer span {
+        color: var(--accent);
+      }
+
+      /* ANIMATIONS */
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--bg);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--accent);
+        border-radius: 3px;
+      }
+
+      @media (max-width: 768px) {
+        .hero {
+          grid-template-columns: 1fr;
+        }
+        .terminal {
+          display: none;
+        }
+        .about-grid,
+        .contact-grid {
+          grid-template-columns: 1fr;
         }
         .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
+          display: none;
         }
-        .nav-links a {
-            color: var(--muted);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.3s;
-            font-family: 'Fira Code', monospace;
-        }
-        .nav-links a:hover { color: var(--accent2); }
-
-        /* HERO */
-        .hero {
-            min-height: 100vh;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            align-items: center;
-            padding: 0 10vw;
-            padding-top: 5rem;
-            position: relative;
-            z-index: 1;
-            gap: 4rem;
-        }
-
-        .hero-left { display: flex; flex-direction: column; }
-
-        .hero-tag {
-            font-family: 'Fira Code', monospace;
-            color: var(--accent2);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            opacity: 0;
-            animation: fadeUp 0.6s ease forwards 0.2s;
-        }
-        .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 5rem);
-            font-weight: 700;
-            line-height: 1;
-            margin-bottom: 1rem;
-            opacity: 0;
-            animation: fadeUp 0.6s ease forwards 0.4s;
-        }
-
-        /* GLITCH */
-        .glitch {
-            position: relative;
-            background: linear-gradient(135deg, var(--accent), var(--accent2));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .glitch::before, .glitch::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0; left: 0;
-            background: linear-gradient(135deg, var(--accent), var(--accent2));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .glitch::before {
-            animation: glitch1 3s infinite;
-            clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
-        }
-        .glitch::after {
-            animation: glitch2 3s infinite;
-            clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
-        }
-        @keyframes glitch1 {
-            0%,95%,100% { transform: translate(0); }
-            96% { transform: translate(-3px, 1px); }
-            97% { transform: translate(3px, -1px); }
-            98% { transform: translate(-1px, 2px); }
-        }
-        @keyframes glitch2 {
-            0%,95%,100% { transform: translate(0); }
-            96% { transform: translate(3px, -1px); }
-            97% { transform: translate(-3px, 1px); }
-            98% { transform: translate(2px, -2px); }
-        }
-
-        .typewriter {
-            font-size: 1.1rem;
-            color: var(--accent2);
-            font-family: 'Fira Code', monospace;
-            margin-bottom: 1rem;
-            opacity: 0;
-            animation: fadeUp 0.6s ease forwards 0.5s;
-            min-height: 2rem;
-        }
-        .typewriter-cursor { animation: blink 1s infinite; }
-        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-
-        .hero-desc {
-            font-size: 1rem;
-            color: var(--muted);
-            max-width: 500px;
-            line-height: 1.7;
-            margin-bottom: 2rem;
-            opacity: 0;
-            animation: fadeUp 0.6s ease forwards 0.6s;
-        }
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            opacity: 0;
-            animation: fadeUp 0.6s ease forwards 0.8s;
-            flex-wrap: wrap;
-        }
-
-        /* QUICK STATS */
-        .quick-stats {
-            display: flex;
-            gap: 2rem;
-            margin-top: 2.5rem;
-            opacity: 0;
-            animation: fadeUp 0.6s ease forwards 1s;
-        }
-        .stat { text-align: center; }
-        .stat-number {
-            font-size: 1.8rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--accent), var(--accent2));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-family: 'Fira Code', monospace;
-        }
-        .stat-label {
-            font-size: 0.7rem;
-            color: var(--muted);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        /* TERMINAL */
-        .terminal {
-            background: #0d0d14;
-            border: 1px solid rgba(124,58,237,0.3);
-            border-radius: 12px;
-            overflow: hidden;
-            opacity: 0;
-            animation: fadeUp 0.6s ease forwards 0.6s;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.5), 0 0 40px rgba(124,58,237,0.1);
-        }
-        .terminal-header {
-            background: #1a1a2e;
-            padding: 0.8rem 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-        .terminal-dot {
-            width: 12px; height: 12px;
-            border-radius: 50%;
-        }
-        .terminal-dot.red { background: #ff5f57; }
-        .terminal-dot.yellow { background: #febc2e; }
-        .terminal-dot.green { background: #28c840; }
-        .terminal-title {
-            font-family: 'Fira Code', monospace;
-            font-size: 0.75rem;
-            color: var(--muted);
-            margin-left: 0.5rem;
-        }
-        .terminal-body {
-            padding: 1.5rem;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.8rem;
-            line-height: 2;
-            min-height: 280px;
-        }
-        .t-comment { color: #4a5568; }
-        .t-keyword { color: #a78bfa; }
-        .t-string { color: #68d391; }
-        .t-func { color: var(--accent2); }
-        .t-num { color: #f6ad55; }
-        .t-cursor {
-            display: inline-block;
-            width: 8px; height: 14px;
-            background: var(--accent2);
-            animation: blink 1s infinite;
-            vertical-align: middle;
-        }
-
-        /* BTN */
-        .btn {
-            padding: 0.8rem 2rem;
-            border-radius: 8px;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 500;
-            cursor: none;
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent), var(--accent2));
-            color: white; border: none;
-        }
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(124,58,237,0.4);
-        }
-        .btn-secondary {
-            background: transparent;
-            color: var(--text);
-            border: 1px solid var(--muted);
-        }
-        .btn-secondary:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            transform: translateY(-2px);
-        }
-
-        /* SECTIONS */
-        section {
-            padding: 8rem 10vw;
-            position: relative;
-            z-index: 1;
-        }
-        .section-label {
-            font-family: 'Fira Code', monospace;
-            color: var(--accent2);
-            font-size: 0.85rem;
-            margin-bottom: 0.5rem;
-        }
-        .section-title {
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 700;
-            margin-bottom: 3rem;
-        }
-
-        /* FADE IN */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
-        }
-        .fade-in.visible { opacity: 1; transform: translateY(0); }
-
-        /* ABOUT */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-        .about-text p {
-            color: var(--muted);
-            line-height: 1.8;
-            margin-bottom: 1rem;
-            font-size: 1.05rem;
-        }
-        .about-text p span { color: var(--accent2); font-weight: 500; }
-        .about-card {
-            background: var(--surface);
-            border: 1px solid rgba(124,58,237,0.2);
-            border-radius: 16px;
-            padding: 2rem;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.85rem;
-            line-height: 1.8;
-        }
-        .about-card .comment { color: #4a5568; }
-        .about-card .key { color: var(--accent2); }
-        .about-card .value { color: #a78bfa; }
-        .about-card .string { color: #68d391; }
-        .about-card .bracket { color: var(--text); }
-
-        /* TIMELINE */
-        .timeline {
-            position: relative;
-            padding-left: 2rem;
-        }
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 0; top: 0; bottom: 0;
-            width: 2px;
-            background: linear-gradient(to bottom, var(--accent), var(--accent2), transparent);
-        }
-        .timeline-item {
-            position: relative;
-            padding-bottom: 2.5rem;
-            padding-left: 2rem;
-        }
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -2.4rem; top: 0.4rem;
-            width: 10px; height: 10px;
-            border-radius: 50%;
-            background: var(--accent);
-            border: 2px solid var(--accent2);
-            box-shadow: 0 0 10px rgba(124,58,237,0.5);
-        }
-        .timeline-date {
-            font-family: 'Fira Code', monospace;
-            font-size: 0.75rem;
-            color: var(--accent2);
-            margin-bottom: 0.3rem;
-        }
-        .timeline-title {
-            font-weight: 600;
-            font-size: 1rem;
-            margin-bottom: 0.3rem;
-        }
-        .timeline-desc {
-            color: var(--muted);
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-
-        /* SKILLS */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-        .skill-card {
-            background: var(--surface);
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 12px;
-            padding: 1.5rem;
-            transition: all 0.3s ease;
-        }
-        .skill-card:hover {
-            border-color: rgba(124,58,237,0.4);
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
-        .skill-card h3 {
-            font-size: 0.8rem;
-            color: var(--muted);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 1rem;
-            font-family: 'Fira Code', monospace;
-        }
-        .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-        .tag {
-            background: rgba(124,58,237,0.15);
-            color: #a78bfa;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-family: 'Fira Code', monospace;
-            border: 1px solid rgba(124,58,237,0.2);
-        }
-        .tag.cyan {
-            background: rgba(6,182,212,0.15);
-            color: var(--accent2);
-            border-color: rgba(6,182,212,0.2);
-        }
-        .tag.green {
-            background: rgba(52,211,153,0.15);
-            color: #34d399;
-            border-color: rgba(52,211,153,0.2);
-        }
-
-        /* CERT */
-        .cert-card {
-            background: var(--surface);
-            border: 1px solid rgba(251,191,36,0.3);
-            border-radius: 16px;
-            padding: 2rem;
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            color: var(--text);
-            max-width: 600px;
-        }
-        .cert-card:hover {
-            border-color: rgba(251,191,36,0.6);
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(251,191,36,0.1);
-        }
-        .cert-emoji { font-size: 3rem; }
-        .cert-title { font-weight: 600; font-size: 1.1rem; margin-bottom: 0.3rem; }
-        .cert-sub { color: var(--muted); font-size: 0.85rem; font-family: 'Fira Code', monospace; }
-        .cert-badge {
-            margin-left: auto;
-            background: rgba(251,191,36,0.15);
-            color: #fbbf24;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            border: 1px solid rgba(251,191,36,0.3);
-            font-family: 'Fira Code', monospace;
-            white-space: nowrap;
-        }
-
-        /* PROJECTS */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 1.5rem;
-        }
-        .project-card {
-            background: var(--surface);
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 16px;
-            padding: 2rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--accent), var(--accent2));
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-        .project-card:hover::before { transform: scaleX(1); }
-        .project-card:hover {
-            border-color: rgba(124,58,237,0.3);
-            transform: translateY(-6px);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
-        }
-        .project-emoji { font-size: 2.5rem; margin-bottom: 1rem; }
-        .project-status {
-            display: inline-block;
-            font-size: 0.7rem;
-            font-family: 'Fira Code', monospace;
-            padding: 0.2rem 0.6rem;
-            border-radius: 20px;
-            margin-bottom: 1rem;
-        }
-        .status-wip {
-            background: rgba(251,191,36,0.15);
-            color: #fbbf24;
-            border: 1px solid rgba(251,191,36,0.2);
-        }
-        .status-done {
-            background: rgba(52,211,153,0.15);
-            color: #34d399;
-            border: 1px solid rgba(52,211,153,0.2);
-        }
-        .project-card h3 { font-size: 1.2rem; font-weight: 600; margin-bottom: 0.8rem; }
-        .project-card p {
-            color: var(--muted);
-            font-size: 0.9rem;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-        }
-        .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-
-        /* FUN FACTS */
-        .facts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-        }
-        .fact-card {
-            background: var(--surface);
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 12px;
-            padding: 1.5rem;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-        .fact-card:hover {
-            border-color: rgba(124,58,237,0.3);
-            transform: translateY(-4px);
-        }
-        .fact-emoji { font-size: 2rem; margin-bottom: 0.5rem; }
-        .fact-text { color: var(--muted); font-size: 0.85rem; line-height: 1.5; }
-        .fact-text span { color: var(--text); font-weight: 600; }
-
-        /* CONTACT */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: start;
-        }
-        .contact-text p {
-            color: var(--muted);
-            line-height: 1.8;
-            font-size: 1.05rem;
-            margin-bottom: 2rem;
-        }
-        .contact-links { display: flex; flex-direction: column; gap: 1rem; }
-        .contact-link {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem 1.5rem;
-            background: var(--surface);
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 12px;
-            text-decoration: none;
-            color: var(--text);
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-        }
-        .contact-link:hover {
-            border-color: rgba(124,58,237,0.4);
-            transform: translateX(6px);
-            color: var(--accent2);
-        }
-        .contact-link .link-icon { font-size: 1.2rem; width: 2rem; text-align: center; }
-        .contact-link .link-label {
-            font-family: 'Fira Code', monospace;
-            font-size: 0.75rem;
-            color: var(--muted);
-            display: block;
-        }
-
-        /* FOOTER */
-        footer {
-            padding: 3rem 10vw;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: var(--muted);
-            font-size: 0.9rem;
-            position: relative;
-            z-index: 1;
-        }
-        footer span { color: var(--accent); }
-
-        /* ANIMATIONS */
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: var(--bg); }
-        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
-
-        @media (max-width: 768px) {
-            .hero { grid-template-columns: 1fr; }
-            .terminal { display: none; }
-            .about-grid, .contact-grid { grid-template-columns: 1fr; }
-            .nav-links { display: none; }
-        }
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <div class="cursor" id="cursor"></div>
     <div class="cursor-trail" id="cursorTrail"></div>
     <div id="particles"></div>
 
     <!-- NAV -->
     <nav>
-        <div class="nav-logo">irene.dev ✝️</div>
-        <ul class="nav-links">
-            <li><a href="#about">// about</a></li>
-            <li><a href="#skills">// skills</a></li>
-            <li><a href="#projects">// projects</a></li>
-            <li><a href="#contact">// contact</a></li>
-        </ul>
+      <div class="nav-logo">irene.dev ✝️</div>
+      <ul class="nav-links">
+        <li><a href="#about">// about</a></li>
+        <li><a href="#skills">// skills</a></li>
+        <li><a href="#projects">// projects</a></li>
+        <li><a href="#contact">// contact</a></li>
+      </ul>
     </nav>
 
     <!-- HERO -->
     <section class="hero">
-        <div class="hero-left">
-            <p class="hero-tag">// hello world 👋</p>
-            <h1>Irene <span class="glitch" data-text="Miranda">Miranda</span></h1>
-            <div class="typewriter"><span id="typewriter-text"></span><span class="typewriter-cursor">|</span></div>
-            <p class="hero-desc">CS student from PH 🇵🇭 passionate about coding and game dev. Building things with Flutter, Java & Godot. Lazy but somehow always coding. ✝️</p>
-            <div class="hero-buttons">
-                <a href="#projects" class="btn btn-primary">see my work</a>
-                <a href="#contact" class="btn btn-secondary">get in touch</a>
-            </div>
-            <div class="quick-stats">
-                <div class="stat">
-                    <div class="stat-number">4+</div>
-                    <div class="stat-label">Projects</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">2nd</div>
-                    <div class="stat-label">Year CS</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">6+</div>
-                    <div class="stat-label">Technologies</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">∞</div>
-                    <div class="stat-label">Motivation</div>
-                </div>
-            </div>
+      <div class="hero-left">
+        <p class="hero-tag">// hello world 👋</p>
+        <h1>Irene <span class="glitch" data-text="Miranda">Miranda</span></h1>
+        <div class="typewriter">
+          <span id="typewriter-text"></span
+          ><span class="typewriter-cursor">|</span>
         </div>
+        <p class="hero-desc">
+          CS student from PH 🇵🇭 passionate about coding and game dev. Building
+          things with Flutter, Java & Godot. Lazy but somehow always coding. ✝️
+        </p>
+        <div class="hero-buttons">
+          <a href="#projects" class="btn btn-primary">see my work</a>
+          <a href="#contact" class="btn btn-secondary">get in touch</a>
+        </div>
+        <div class="quick-stats">
+          <div class="stat">
+            <div class="stat-number">4+</div>
+            <div class="stat-label">Projects</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">2nd</div>
+            <div class="stat-label">Year CS</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">6+</div>
+            <div class="stat-label">Technologies</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">∞</div>
+            <div class="stat-label">Motivation</div>
+          </div>
+        </div>
+      </div>
 
-        <!-- TERMINAL -->
-        <div class="terminal">
-            <div class="terminal-header">
-                <div class="terminal-dot red"></div>
-                <div class="terminal-dot yellow"></div>
-                <div class="terminal-dot green"></div>
-                <span class="terminal-title">irene_miranda.py</span>
-            </div>
-            <div class="terminal-body" id="terminal-body"></div>
+      <!-- TERMINAL -->
+      <div class="terminal">
+        <div class="terminal-header">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <span class="terminal-title">irene_miranda.py</span>
         </div>
+        <div class="terminal-body" id="terminal-body"></div>
+      </div>
     </section>
 
     <!-- ABOUT -->
     <section id="about">
-        <p class="section-label fade-in">// about</p>
-        <h2 class="section-title fade-in">who am i?</h2>
-        <div class="about-grid">
-            <div class="about-text fade-in">
-                <p>Hey!! I'm <span>Irene</span>, a 19 y/o Computer Science student at <span>LSPU</span> currently in my second year. I love building things — whether it's apps, games, or random projects at 2am.</p>
-                <p>I'm currently learning <span>Flutter</span> for mobile dev and exploring <span>game development</span> with Godot. My course is heavily focused on <span>AI and Intelligent Systems</span> — from agent-based modeling to building smart applications.</p>
-                <p>When I'm not coding, I'm probably being lazy or spending time with God. <span>Matthew 6:33 ✝️</span></p>
-            </div>
-            <div class="about-card fade-in">
-                <p class="comment">// irene.json</p><br>
-                <p><span class="bracket">{</span></p>
-                <p>&nbsp;&nbsp;<span class="key">"name"</span>: <span class="string">"Irene Miranda"</span>,</p>
-                <p>&nbsp;&nbsp;<span class="key">"age"</span>: <span class="value">19</span>,</p>
-                <p>&nbsp;&nbsp;<span class="key">"location"</span>: <span class="string">"Philippines 🇵🇭"</span>,</p>
-                <p>&nbsp;&nbsp;<span class="key">"course"</span>: <span class="string">"BS Computer Science"</span>,</p>
-                <p>&nbsp;&nbsp;<span class="key">"school"</span>: <span class="string">"LSPU"</span>,</p>
-                <p>&nbsp;&nbsp;<span class="key">"year"</span>: <span class="string">"2nd Year"</span>,</p>
-                <p>&nbsp;&nbsp;<span class="key">"focus"</span>: <span class="string">"AI & Game Dev"</span>,</p>
-                <p>&nbsp;&nbsp;<span class="key">"faith"</span>: <span class="string">"Christian ✝️"</span>,</p>
-                <p>&nbsp;&nbsp;<span class="key">"status"</span>: <span class="string">"always learning"</span></p>
-                <p><span class="bracket">}</span></p>
-            </div>
+      <p class="section-label fade-in">// about</p>
+      <h2 class="section-title fade-in">who am i?</h2>
+      <div class="about-grid">
+        <div class="about-text fade-in">
+          <p>
+            Hey!! I'm <span>Irene</span>, a 19 y/o Computer Science student at
+            <span>LSPU</span> currently in my second year. I love building
+            things — whether it's apps, games, or random projects at 2am.
+          </p>
+          <p>
+            I'm currently learning <span>Flutter</span> for mobile dev and
+            exploring <span>game development</span> with Godot. My course is
+            heavily focused on <span>AI and Intelligent Systems</span> — from
+            agent-based modeling to building smart applications.
+          </p>
+          <p>
+            When I'm not coding, I'm probably being lazy or spending time with
+            God. <span>Matthew 6:33 ✝️</span>
+          </p>
         </div>
+        <div class="about-card fade-in">
+          <p class="comment">// irene.json</p>
+          <br />
+          <p><span class="bracket">{</span></p>
+          <p>
+            &nbsp;&nbsp;<span class="key">"name"</span>:
+            <span class="string">"Irene Miranda"</span>,
+          </p>
+          <p>
+            &nbsp;&nbsp;<span class="key">"age"</span>:
+            <span class="value">19</span>,
+          </p>
+          <p>
+            &nbsp;&nbsp;<span class="key">"location"</span>:
+            <span class="string">"Philippines 🇵🇭"</span>,
+          </p>
+          <p>
+            &nbsp;&nbsp;<span class="key">"course"</span>:
+            <span class="string">"BS Computer Science"</span>,
+          </p>
+          <p>
+            &nbsp;&nbsp;<span class="key">"school"</span>:
+            <span class="string">"LSPU"</span>,
+          </p>
+          <p>
+            &nbsp;&nbsp;<span class="key">"year"</span>:
+            <span class="string">"2nd Year"</span>,
+          </p>
+          <p>
+            &nbsp;&nbsp;<span class="key">"focus"</span>:
+            <span class="string">"AI & Game Dev"</span>,
+          </p>
+          <p>
+            &nbsp;&nbsp;<span class="key">"faith"</span>:
+            <span class="string">"Christian ✝️"</span>,
+          </p>
+          <p>
+            &nbsp;&nbsp;<span class="key">"status"</span>:
+            <span class="string">"always learning"</span>
+          </p>
+          <p><span class="bracket">}</span></p>
+        </div>
+      </div>
     </section>
 
     <!-- TIMELINE -->
     <section id="timeline">
-        <p class="section-label fade-in">// journey</p>
-        <h2 class="section-title fade-in">my story so far</h2>
-        <div class="timeline">
-            <div class="timeline-item fade-in">
-                <div class="timeline-date">2023 — present</div>
-                <div class="timeline-title">BS Computer Science @ LSPU</div>
-                <div class="timeline-desc">Started my CS journey focusing on algorithms, AI, intelligent systems, graphics, and application development. Currently in 2nd year.</div>
-            </div>
-            <div class="timeline-item fade-in">
-                <div class="timeline-date">2024</div>
-                <div class="timeline-title">Disaster Response Priority System</div>
-                <div class="timeline-desc">Contributed frontend development for an AI-powered disaster triage app built with Python & PyQt6. Helped design the UI that makes critical information accessible during emergencies.</div>
-            </div>
-            <div class="timeline-item fade-in">
-                <div class="timeline-date">2024</div>
-                <div class="timeline-title">CodeChum Certificate 🏆</div>
-                <div class="timeline-desc">Earned a certificate of completion for finishing programming coursework on CodeChum — an online competitive coding platform.</div>
-            </div>
-            <div class="timeline-item fade-in">
-                <div class="timeline-date">2025 — present</div>
-                <div class="timeline-title">Flutter, GAMA & AI Systems</div>
-                <div class="timeline-desc">Actively building mobile apps with Flutter, agent-based simulations with GAMA, and exploring AI/ML concepts through coursework and projects.</div>
-            </div>
-            <div class="timeline-item fade-in">
-                <div class="timeline-date">2025 — present</div>
-                <div class="timeline-title">LSPU Campus Navigation App</div>
-                <div class="timeline-desc">Currently building a Flutter-based campus navigation app for LSPU students and faculty. Designed high-fidelity wireframes in Figma.</div>
-            </div>
+      <p class="section-label fade-in">// journey</p>
+      <h2 class="section-title fade-in">my story so far</h2>
+      <div class="timeline">
+        <div class="timeline-item fade-in">
+          <div class="timeline-date">2023 — present</div>
+          <div class="timeline-title">BS Computer Science @ LSPU</div>
+          <div class="timeline-desc">
+            Started my CS journey focusing on algorithms, AI, intelligent
+            systems, graphics, and application development. Currently in 2nd
+            year.
+          </div>
         </div>
+        <div class="timeline-item fade-in">
+          <div class="timeline-date">2024</div>
+          <div class="timeline-title">Disaster Response Priority System</div>
+          <div class="timeline-desc">
+            Contributed frontend development for an AI-powered disaster triage
+            app built with Python & PyQt6. Helped design the UI that makes
+            critical information accessible during emergencies.
+          </div>
+        </div>
+        <div class="timeline-item fade-in">
+          <div class="timeline-date">2024</div>
+          <div class="timeline-title">CodeChum Certificate 🏆</div>
+          <div class="timeline-desc">
+            Earned a certificate of completion for finishing programming
+            coursework on CodeChum — an online competitive coding platform.
+          </div>
+        </div>
+        <div class="timeline-item fade-in">
+          <div class="timeline-date">2025 — present</div>
+          <div class="timeline-title">Flutter, GAMA & AI Systems</div>
+          <div class="timeline-desc">
+            Actively building mobile apps with Flutter, agent-based simulations
+            with GAMA, and exploring AI/ML concepts through coursework and
+            projects.
+          </div>
+        </div>
+        <div class="timeline-item fade-in">
+          <div class="timeline-date">2025 — present</div>
+          <div class="timeline-title">LSPU Campus Navigation App</div>
+          <div class="timeline-desc">
+            Currently building a Flutter-based campus navigation app for LSPU
+            students and faculty. Designed high-fidelity wireframes in Figma.
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- SKILLS -->
     <section id="skills">
-        <p class="section-label fade-in">// skills</p>
-        <h2 class="section-title fade-in">what i work with</h2>
-        <div class="skills-grid">
-            <div class="skill-card fade-in">
-                <h3>languages</h3>
-                <div class="skill-tags">
-                    <span class="tag">Java</span>
-                    <span class="tag">Python</span>
-                    <span class="tag">Dart</span>
-                    <span class="tag">C#</span>
-                    <span class="tag">GAML</span>
-                </div>
-            </div>
-            <div class="skill-card fade-in">
-                <h3>currently learning</h3>
-                <div class="skill-tags">
-                    <span class="tag cyan">Flutter</span>
-                    <span class="tag cyan">Unity</span>
-                    <span class="tag cyan">Excel</span>
-                    <span class="tag cyan">PyQt6</span>
-                </div>
-            </div>
-            <div class="skill-card fade-in">
-                <h3>tools & platforms</h3>
-                <div class="skill-tags">
-                    <span class="tag green">Godot</span>
-                    <span class="tag green">VS Code</span>
-                    <span class="tag green">GAMA</span>
-                    <span class="tag green">GitHub</span>
-                    <span class="tag green">Figma</span>
-                </div>
-            </div>
+      <p class="section-label fade-in">// skills</p>
+      <h2 class="section-title fade-in">what i work with</h2>
+      <div class="skills-grid">
+        <div class="skill-card fade-in">
+          <h3>languages</h3>
+          <div class="skill-tags">
+            <span class="tag">Java</span>
+            <span class="tag">Python</span>
+            <span class="tag">Dart</span>
+            <span class="tag">C#</span>
+            <span class="tag">GAML</span>
+          </div>
         </div>
+        <div class="skill-card fade-in">
+          <h3>currently learning</h3>
+          <div class="skill-tags">
+            <span class="tag cyan">Flutter</span>
+            <span class="tag cyan">Unity</span>
+            <span class="tag cyan">Excel</span>
+            <span class="tag cyan">PyQt6</span>
+          </div>
+        </div>
+        <div class="skill-card fade-in">
+          <h3>tools & platforms</h3>
+          <div class="skill-tags">
+            <span class="tag green">Godot</span>
+            <span class="tag green">VS Code</span>
+            <span class="tag green">GAMA</span>
+            <span class="tag green">GitHub</span>
+            <span class="tag green">Figma</span>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- CERTIFICATES -->
     <section id="certificates">
-        <p class="section-label fade-in">// certificates</p>
-        <h2 class="section-title fade-in">achievements</h2>
-        <a href="https://lspu.codechum.com/certificates/17631" target="_blank" class="cert-card fade-in">
-            <div class="cert-emoji">🏆</div>
-            <div>
-                <div class="cert-title">CodeChum Programming Certificate</div>
-                <div class="cert-sub">lspu.codechum.com · 2024</div>
-            </div>
-            <div class="cert-badge">verified ✓</div>
-        </a>
+      <p class="section-label fade-in">// certificates</p>
+      <h2 class="section-title fade-in">achievements</h2>
+      <a
+        href="https://lspu.codechum.com/certificates/17631"
+        target="_blank"
+        class="cert-card fade-in">
+        <div class="cert-emoji">🏆</div>
+        <div>
+          <div class="cert-title">CodeChum Programming Certificate</div>
+          <div class="cert-sub">lspu.codechum.com · 2024</div>
+        </div>
+        <div class="cert-badge">verified ✓</div>
+      </a>
     </section>
 
     <!-- PROJECTS -->
     <section id="projects">
-        <p class="section-label fade-in">// projects</p>
-        <h2 class="section-title fade-in">what i've built</h2>
-        <div class="projects-grid">
-            <div class="project-card fade-in">
-                <div class="project-emoji">🗺️</div>
-                <span class="project-status status-wip">in progress</span>
-                <h3>LSPU Campus Navigation App</h3>
-                <p>A mobile navigation app for LSPU students and faculty. Features campus e-map, building finder, parking areas, and real-time notifications.</p>
-                <div class="project-tags">
-                    <span class="tag cyan">Flutter</span>
-                    <span class="tag cyan">Dart</span>
-                    <span class="tag">Figma</span>
-                </div>
-            </div>
-            <div class="project-card fade-in">
-                <div class="project-emoji">✅</div>
-                <span class="project-status status-wip">in progress</span>
-                <h3>Task Priority Manager</h3>
-                <p>A CLI-based task manager that sorts tasks by deadline using brute-force bubble sort. Features priority levels, categories, and persistent JSON storage.</p>
-                <div class="project-tags">
-                    <span class="tag">Python</span>
-                    <span class="tag">Algorithms</span>
-                    <span class="tag green">CLI</span>
-                </div>
-            </div>
-            <div class="project-card fade-in">
-                <div class="project-emoji">🌋</div>
-                <span class="project-status status-done">completed</span>
-                <h3>Disaster Response Priority System</h3>
-                <p>AI-powered desktop app that determines priority evacuation lists during natural disasters. Analyzes resident data including income, house material, and PWD status.</p>
-                <div class="project-tags">
-                    <span class="tag">Python</span>
-                    <span class="tag">PyQt6</span>
-                    <span class="tag cyan">AI</span>
-                </div>
-            </div>
-            <div class="project-card fade-in">
-                <div class="project-emoji">🤖</div>
-                <span class="project-status status-done">completed</span>
-                <h3>Classroom Participation Simulation</h3>
-                <p>Agent-based simulation modeling 20 student agents with energy and participation mechanics. Demonstrates emergent behavior using GAMA Platform.</p>
-                <div class="project-tags">
-                    <span class="tag">GAML</span>
-                    <span class="tag green">GAMA</span>
-                    <span class="tag cyan">AI</span>
-                </div>
-            </div>
+      <p class="section-label fade-in">// projects</p>
+      <h2 class="section-title fade-in">what i've built</h2>
+      <div class="projects-grid">
+        <div class="project-card fade-in">
+          <div class="project-emoji">🗺️</div>
+          <span class="project-status status-wip">in progress</span>
+          <h3>LSPU Campus Navigation App</h3>
+          <p>
+            A mobile navigation app for LSPU students and faculty. Features
+            campus e-map, building finder, parking areas, and real-time
+            notifications.
+          </p>
+          <div class="project-tags">
+            <span class="tag cyan">Flutter</span>
+            <span class="tag cyan">Dart</span>
+            <span class="tag">Figma</span>
+          </div>
         </div>
+        <div class="project-card fade-in">
+          <div class="project-emoji">✅</div>
+          <span class="project-status status-wip">in progress</span>
+          <h3>Task Priority Manager</h3>
+          <p>
+            A CLI-based task manager that sorts tasks by deadline using
+            brute-force bubble sort. Features priority levels, categories, and
+            persistent JSON storage.
+          </p>
+          <div class="project-tags">
+            <span class="tag">Python</span>
+            <span class="tag">Algorithms</span>
+            <span class="tag green">CLI</span>
+          </div>
+        </div>
+        <div class="project-card fade-in">
+          <div class="project-emoji">🌋</div>
+          <span class="project-status status-done">completed</span>
+          <h3>Disaster Response Priority System</h3>
+          <p>
+            AI-powered desktop app that determines priority evacuation lists
+            during natural disasters. Analyzes resident data including income,
+            house material, and PWD status.
+          </p>
+          <div class="project-tags">
+            <span class="tag">Python</span>
+            <span class="tag">PyQt6</span>
+            <span class="tag cyan">AI</span>
+          </div>
+        </div>
+        <div class="project-card fade-in">
+          <div class="project-emoji">🤖</div>
+          <span class="project-status status-done">completed</span>
+          <h3>Classroom Participation Simulation</h3>
+          <p>
+            Agent-based simulation modeling 20 student agents with energy and
+            participation mechanics. Demonstrates emergent behavior using GAMA
+            Platform.
+          </p>
+          <div class="project-tags">
+            <span class="tag">GAML</span>
+            <span class="tag green">GAMA</span>
+            <span class="tag cyan">AI</span>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- FUN FACTS -->
     <section id="facts">
-        <p class="section-label fade-in">// fun_facts.exe</p>
-        <h2 class="section-title fade-in">a little more about me</h2>
-        <div class="facts-grid">
-            <div class="fact-card fade-in">
-                <div class="fact-emoji">✝️</div>
-                <div class="fact-text"><span>Faith first</span><br>Matthew 6:33 is my life motto. God before code, always.</div>
-            </div>
-            <div class="fact-card fade-in">
-                <div class="fact-emoji">🎮</div>
-                <div class="fact-text"><span>Game dev dreamer</span><br>Currently using Godot, Unity is next on the list 👀</div>
-            </div>
-            <div class="fact-card fade-in">
-                <div class="fact-emoji">😴</div>
-                <div class="fact-text"><span>Professionally lazy</span><br>Somehow still gets things done. It's a superpower honestly.</div>
-            </div>
-            <div class="fact-card fade-in">
-                <div class="fact-emoji">🤖</div>
-                <div class="fact-text"><span>AI enthusiast</span><br>Studying intelligent systems and loving every second of it.</div>
-            </div>
-            <div class="fact-card fade-in">
-                <div class="fact-emoji">📱</div>
-                <div class="fact-text"><span>Mobile dev in progress</span><br>Learning Flutter to build apps people actually use.</div>
-            </div>
-            <div class="fact-card fade-in">
-                <div class="fact-emoji">🇵🇭</div>
-                <div class="fact-text"><span>Proudly Pinoy</span><br>Building for the Philippines, one project at a time.</div>
-            </div>
+      <p class="section-label fade-in">// fun_facts.exe</p>
+      <h2 class="section-title fade-in">a little more about me</h2>
+      <div class="facts-grid">
+        <div class="fact-card fade-in">
+          <div class="fact-emoji">✝️</div>
+          <div class="fact-text">
+            <span>Faith first</span><br />Matthew 6:33 is my life motto. God
+            before code, always.
+          </div>
         </div>
+        <div class="fact-card fade-in">
+          <div class="fact-emoji">🎮</div>
+          <div class="fact-text">
+            <span>Game dev dreamer</span><br />Currently using Godot, Unity is
+            next on the list 👀
+          </div>
+        </div>
+        <div class="fact-card fade-in">
+          <div class="fact-emoji">😴</div>
+          <div class="fact-text">
+            <span>Professionally lazy</span><br />Somehow still gets things
+            done. It's a superpower honestly.
+          </div>
+        </div>
+        <div class="fact-card fade-in">
+          <div class="fact-emoji">🤖</div>
+          <div class="fact-text">
+            <span>AI enthusiast</span><br />Studying intelligent systems and
+            loving every second of it.
+          </div>
+        </div>
+        <div class="fact-card fade-in">
+          <div class="fact-emoji">📱</div>
+          <div class="fact-text">
+            <span>Mobile dev in progress</span><br />Learning Flutter to build
+            apps people actually use.
+          </div>
+        </div>
+        <div class="fact-card fade-in">
+          <div class="fact-emoji">🇵🇭</div>
+          <div class="fact-text">
+            <span>Proudly Pinoy</span><br />Building for the Philippines, one
+            project at a time.
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- CONTACT -->
     <section id="contact">
-        <p class="section-label fade-in">// contact</p>
-        <h2 class="section-title fade-in">let's connect!</h2>
-        <div class="contact-grid">
-            <div class="contact-text fade-in">
-                <p>I'm always open to connecting with fellow developers, collaborating on projects, or just chatting about tech and faith!! Feel free to reach out 🥺✝️</p>
-                <p style="font-family:'Fira Code',monospace; color:var(--accent2); font-size:0.85rem;">// open to: collaborations, internships, learning together 😄</p>
-            </div>
-            <div class="contact-links fade-in">
-                <a href="mailto:mirandairene777@gmail.com" class="contact-link">
-                    <span class="link-icon">📧</span>
-                    <div><span class="link-label">email</span>mirandairene777@gmail.com</div>
-                </a>
-                <a href="https://www.linkedin.com/in/miranda-irene-austria-a3886637b" target="_blank" class="contact-link">
-                    <span class="link-icon">💼</span>
-                    <div><span class="link-label">linkedin</span>miranda-irene-austria</div>
-                </a>
-                <a href="https://www.facebook.com/ir.ene.5496683" target="_blank" class="contact-link">
-                    <span class="link-icon">👤</span>
-                    <div><span class="link-label">facebook</span>Irene Miranda</div>
-                </a>
-                <a href="https://www.instagram.com/envpvn/" target="_blank" class="contact-link">
-                    <span class="link-icon">📸</span>
-                    <div><span class="link-label">instagram</span>@envpvn</div>
-                </a>
-                <a href="https://www.youtube.com/@1R3N3.7" target="_blank" class="contact-link">
-                    <span class="link-icon">🎥</span>
-                    <div><span class="link-label">youtube</span>@1R3N3.7</div>
-                </a>
-            </div>
+      <p class="section-label fade-in">// contact</p>
+      <h2 class="section-title fade-in">let's connect!</h2>
+      <div class="contact-grid">
+        <div class="contact-text fade-in">
+          <p>
+            I'm always open to connecting with fellow developers, collaborating
+            on projects, or just chatting about tech and faith!! Feel free to
+            reach out 🥺✝️
+          </p>
+          <p
+            style="
+              font-family: &quot;Fira Code&quot;, monospace;
+              color: var(--accent2);
+              font-size: 0.85rem;
+            ">
+            // open to: collaborations, internships, learning together 😄
+          </p>
         </div>
+        <div class="contact-links fade-in">
+          <a href="mailto:mirandairene777@gmail.com" class="contact-link">
+            <span class="link-icon">📧</span>
+            <div>
+              <span class="link-label">email</span>mirandairene777@gmail.com
+            </div>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/miranda-irene-austria-a3886637b"
+            target="_blank"
+            class="contact-link">
+            <span class="link-icon">💼</span>
+            <div>
+              <span class="link-label">linkedin</span>miranda-irene-austria
+            </div>
+          </a>
+          <a
+            href="https://www.facebook.com/ir.ene.5496683"
+            target="_blank"
+            class="contact-link">
+            <span class="link-icon">👤</span>
+            <div><span class="link-label">facebook</span>Irene Miranda</div>
+          </a>
+          <a
+            href="https://www.instagram.com/envpvn/"
+            target="_blank"
+            class="contact-link">
+            <span class="link-icon">📸</span>
+            <div><span class="link-label">instagram</span>@envpvn</div>
+          </a>
+          <a
+            href="https://www.youtube.com/@1R3N3.7"
+            target="_blank"
+            class="contact-link">
+            <span class="link-icon">🎥</span>
+            <div><span class="link-label">youtube</span>@1R3N3.7</div>
+          </a>
+        </div>
+      </div>
     </section>
 
     <!-- FOOTER -->
     <footer>
-        <p>designed & built by <span>Irene Miranda</span> ✝️</p>
-        <p>LSPU · BSCS2B · 2025-2026</p>
+      <p>designed & built by <span>Irene Miranda</span> ✝️</p>
+      <p>LSPU · BSCS2B · 2025-2026</p>
     </footer>
 
     <script>
-        // CURSOR
-        const cursor = document.getElementById('cursor');
-        const trail = document.getElementById('cursorTrail');
-        let mouseX = 0, mouseY = 0, trailX = 0, trailY = 0;
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX; mouseY = e.clientY;
-            cursor.style.left = mouseX - 10 + 'px';
-            cursor.style.top = mouseY - 10 + 'px';
-        });
-        function animateTrail() {
-            trailX += (mouseX - trailX) * 0.15;
-            trailY += (mouseY - trailY) * 0.15;
-            trail.style.left = trailX - 4 + 'px';
-            trail.style.top = trailY - 4 + 'px';
-            requestAnimationFrame(animateTrail);
+      // CURSOR
+      const cursor = document.getElementById("cursor");
+      const trail = document.getElementById("cursorTrail");
+      let mouseX = 0,
+        mouseY = 0,
+        trailX = 0,
+        trailY = 0;
+      document.addEventListener("mousemove", (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        cursor.style.left = mouseX - 10 + "px";
+        cursor.style.top = mouseY - 10 + "px";
+      });
+      function animateTrail() {
+        trailX += (mouseX - trailX) * 0.15;
+        trailY += (mouseY - trailY) * 0.15;
+        trail.style.left = trailX - 4 + "px";
+        trail.style.top = trailY - 4 + "px";
+        requestAnimationFrame(animateTrail);
+      }
+      animateTrail();
+
+      // PARTICLES
+      const container = document.getElementById("particles");
+      for (let i = 0; i < 40; i++) {
+        const p = document.createElement("div");
+        p.className = "particle";
+        p.style.left = Math.random() * 100 + "vw";
+        p.style.animationDuration = Math.random() * 15 + 10 + "s";
+        p.style.animationDelay = Math.random() * 10 + "s";
+        p.style.width = p.style.height = Math.random() * 3 + 1 + "px";
+        p.style.background =
+          Math.random() > 0.5 ? "rgba(124,58,237,0.6)" : "rgba(6,182,212,0.6)";
+        container.appendChild(p);
+      }
+
+      // TYPEWRITER
+      const phrases = [
+        "CS Student @ LSPU 🎓",
+        "Game Dev Enthusiast 🎮",
+        "Flutter Developer 📱",
+        "AI & Intelligent Systems 🤖",
+        "Blessed & Coding ✝️",
+      ];
+      let phraseIndex = 0,
+        charIndex = 0,
+        isDeleting = false;
+      const el = document.getElementById("typewriter-text");
+      function typewrite() {
+        const current = phrases[phraseIndex];
+        if (isDeleting) {
+          el.textContent = current.substring(0, charIndex--);
+        } else {
+          el.textContent = current.substring(0, charIndex++);
         }
-        animateTrail();
-
-        // PARTICLES
-        const container = document.getElementById('particles');
-        for (let i = 0; i < 40; i++) {
-            const p = document.createElement('div');
-            p.className = 'particle';
-            p.style.left = Math.random() * 100 + 'vw';
-            p.style.animationDuration = (Math.random() * 15 + 10) + 's';
-            p.style.animationDelay = (Math.random() * 10) + 's';
-            p.style.width = p.style.height = (Math.random() * 3 + 1) + 'px';
-            p.style.background = Math.random() > 0.5 ? 'rgba(124,58,237,0.6)' : 'rgba(6,182,212,0.6)';
-            container.appendChild(p);
+        if (!isDeleting && charIndex === current.length + 1) {
+          isDeleting = true;
+          setTimeout(typewrite, 1500);
+          return;
         }
-
-        // TYPEWRITER
-        const phrases = [
-            'CS Student @ LSPU 🎓',
-            'Game Dev Enthusiast 🎮',
-            'Flutter Developer 📱',
-            'AI & Intelligent Systems 🤖',
-            'Blessed & Coding ✝️'
-        ];
-        let phraseIndex = 0, charIndex = 0, isDeleting = false;
-        const el = document.getElementById('typewriter-text');
-        function typewrite() {
-            const current = phrases[phraseIndex];
-            if (isDeleting) { el.textContent = current.substring(0, charIndex--); }
-            else { el.textContent = current.substring(0, charIndex++); }
-            if (!isDeleting && charIndex === current.length + 1) {
-                isDeleting = true; setTimeout(typewrite, 1500); return;
-            }
-            if (isDeleting && charIndex === -1) {
-                isDeleting = false;
-                phraseIndex = (phraseIndex + 1) % phrases.length;
-                charIndex = 0;
-            }
-            setTimeout(typewrite, isDeleting ? 40 : 80);
+        if (isDeleting && charIndex === -1) {
+          isDeleting = false;
+          phraseIndex = (phraseIndex + 1) % phrases.length;
+          charIndex = 0;
         }
-        setTimeout(typewrite, 1000);
+        setTimeout(typewrite, isDeleting ? 40 : 80);
+      }
+      setTimeout(typewrite, 1000);
 
-        // TERMINAL
-        const lines = [
-            { text: '# about irene_miranda.py', cls: 't-comment' },
-            { text: '', cls: '' },
-            { text: 'class Developer:', cls: 't-keyword' },
-            { text: '  name = "Irene Miranda"', cls: 't-string' },
-            { text: '  age = 19', cls: 't-num' },
-            { text: '  school = "LSPU"', cls: 't-string' },
-            { text: '  status = "2nd Year CS"', cls: 't-string' },
-            { text: '', cls: '' },
-            { text: '  def passion(self):', cls: 't-func' },
-            { text: '    return ["coding", "game_dev",', cls: 't-string' },
-            { text: '            "flutter", "AI"]', cls: 't-string' },
-            { text: '', cls: '' },
-            { text: '  def faith(self):', cls: 't-func' },
-            { text: '    return "Matthew 6:33 ✝️"', cls: 't-string' },
-            { text: '', cls: '' },
-            { text: '# currently building...', cls: 't-comment' },
-            { text: 'irene.build("campus_nav_app")', cls: 't-func' },
-            { text: 'irene.build("task_manager")', cls: 't-func' },
-        ];
+      // TERMINAL
+      const lines = [
+        { text: "# about irene_miranda.py", cls: "t-comment" },
+        { text: "", cls: "" },
+        { text: "class Developer:", cls: "t-keyword" },
+        { text: '  name = "Irene Miranda"', cls: "t-string" },
+        { text: "  age = 19", cls: "t-num" },
+        { text: '  school = "LSPU"', cls: "t-string" },
+        { text: '  status = "2nd Year CS"', cls: "t-string" },
+        { text: "", cls: "" },
+        { text: "  def passion(self):", cls: "t-func" },
+        { text: '    return ["coding", "game_dev",', cls: "t-string" },
+        { text: '            "flutter", "AI"]', cls: "t-string" },
+        { text: "", cls: "" },
+        { text: "  def faith(self):", cls: "t-func" },
+        { text: '    return "Matthew 6:33 ✝️"', cls: "t-string" },
+        { text: "", cls: "" },
+        { text: "# currently building...", cls: "t-comment" },
+        { text: 'irene.build("campus_nav_app")', cls: "t-func" },
+        { text: 'irene.build("task_manager")', cls: "t-func" },
+      ];
 
-        const termBody = document.getElementById('terminal-body');
-        let lineIndex = 0;
+      const termBody = document.getElementById("terminal-body");
+      let lineIndex = 0;
 
-        function typeLine() {
-            if (lineIndex >= lines.length) {
-                const cursor = document.createElement('span');
-                cursor.className = 't-cursor';
-                termBody.appendChild(cursor);
-                return;
-            }
-            const line = lines[lineIndex++];
-            const div = document.createElement('div');
-            if (line.cls) div.className = line.cls;
-            div.textContent = line.text || '\u00A0';
-            termBody.appendChild(div);
-            termBody.scrollTop = termBody.scrollHeight;
-            setTimeout(typeLine, line.text === '' ? 100 : 120);
+      function typeLine() {
+        if (lineIndex >= lines.length) {
+          const cursor = document.createElement("span");
+          cursor.className = "t-cursor";
+          termBody.appendChild(cursor);
+          return;
         }
-        setTimeout(typeLine, 1200);
+        const line = lines[lineIndex++];
+        const div = document.createElement("div");
+        if (line.cls) div.className = line.cls;
+        div.textContent = line.text || "\u00A0";
+        termBody.appendChild(div);
+        termBody.scrollTop = termBody.scrollHeight;
+        setTimeout(typeLine, line.text === "" ? 100 : 120);
+      }
+      setTimeout(typeLine, 1200);
 
-        // SCROLL FADE IN
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+      // SCROLL FADE IN
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) e.target.classList.add("visible");
+          });
+        },
+        { threshold: 0.1 },
+      );
+      document
+        .querySelectorAll(".fade-in")
+        .forEach((el) => observer.observe(el));
     </script>
-</body>
+  </body>
 </html>
